@@ -26,7 +26,7 @@ def read_time(timestr):
     return ((int(timestr[8:10])-1)*86400 + int(timestr[11:13])*3600 + 
             int(timestr[14:16])*60 + int(timestr[17:19]))
 
-def read_data(datafile):
+def read_data(datafile, count=False):
     """
     returns a list of time-ordered OneDrives gathered from the input datafile
     """
@@ -47,4 +47,6 @@ def read_data(datafile):
     drives = drivedic.values()
     drives.sort(key=lambda d: d.coords[0].time)
     
-    return drives[:500] #only 500 drives for now for easier computation
+    if count:
+        return drives[:count]
+    return drives

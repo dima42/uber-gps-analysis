@@ -7,6 +7,7 @@ Created on Sun Jul 07 16:48:06 2013
 
 import datareader as dr
 import overlap as ol
+import plotter as pl
 
 def calculate_overlaps(drives, dist_tol, time_tol):
     """
@@ -40,8 +41,10 @@ def calculate_distances(drives):
         d.set_distance()
 
 def main():
-    drives = dr.read_data(open("gpsdata/all.tsv"))
+    drives = dr.read_data(open("gpsdata/all.tsv"), 500)
     calculate_distances(drives)
-    calculate_overlaps(drives, 0.01, 300)
-
+    calculate_overlaps(drives, 0.01, 900)
+    pl.distance_plot(drives)
+    pl.max_overlap_fractions_plot(drives)    
+    
 main()
