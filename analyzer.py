@@ -21,7 +21,7 @@ def calculate_overlaps(drives, dist_tol, time_tol):
             
             #stop trying if d1 ends more than time_tol before d2 starts
             #note that drives are chronologically ordered
-            if d1.coords[-1].time - d2.coords[0].time < time_tol:
+            if d2.coords[0].time - d1.coords[-1].time > time_tol:
                 break
             
             overlap = ol.compute_overlap(d1, d2, dist_tol, time_tol)
