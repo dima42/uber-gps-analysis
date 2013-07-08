@@ -39,9 +39,15 @@ def compute_overlap(da, db, dist_tol, time_tol):
     matches = []
     for pta in da.coords:
         for ptb in db.coords:
-            if abs(pta.time-ptb.time) < time_tol:
-                if hm.haversine_dist(pta.gps, ptb.gps) < dist_tol:
-                    matches.append([pta, ptb])
+            
+            #times are chronological
+            if ptb.time-pta.time > time_tol:
+                break
+            if pta.time-ptb.time > time_tol:
+                continue
+            
+            if hm.approx_dist(pta.gps, ptb.gps) < dist_tol:
+                matches.append([pta, ptb])
             
     #determine the furthest apart pair of matches
     largest_dist = 0

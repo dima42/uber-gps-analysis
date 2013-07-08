@@ -18,3 +18,11 @@ def haversine_dist(gpsa, gpsb):
     a = math.sin(dlat)**2 + math.cos(lata)*math.cos(latb)*math.sin(dlon)**2
     arc = 2*math.asin(math.sqrt(a))
     return arc*3961.3
+    
+def approx_dist(gpsa, gpsb):
+    """
+    determines an approximate distance using avg sf latitude for scaling
+    and small angle approximation
+    """
+    dlat, dlon = gpsa.lat-gpsb.lat, gpsa.lon-gpsb.lon
+    return math.sqrt(dlat**2+0.434674*dlon**2)*138.275 #2*3961.3*Pi/180

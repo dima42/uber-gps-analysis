@@ -41,7 +41,7 @@ def calculate_distances(drives):
         d.set_distance()
 
 def main():
-    drives = dr.read_data(open("gpsdata/all.tsv"), 500)
+    drives = dr.read_data(open("gpsdata/all.tsv"), 1000)
     calculate_distances(drives)
     calculate_overlaps(drives, 0.01, 900)
     pl.distance_plot(drives)
